@@ -1,0 +1,39 @@
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        height: 300px;
+        border-radius: 15px;
+        border: 1.5px solid black;
+        background-color: #171717;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            height: 100px;
+            width: auto;
+            margin-top: -40px;
+        }
+
+        input {
+            height: 30px;
+            width: 250px;
+            color: white;
+            border: 1px solid black;
+            border-radius: 5px;
+            background-color: #202020;
+            margin: 5px;
+        }
+
+        button {
+            color: white;
+            margin: 5px;
+        }
+    }
+}
