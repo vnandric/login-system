@@ -1,17 +1,24 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
+import { api } from "../../src/utils/api";
 
 import styles from "../styles/index.module.scss";
 
-import { api } from "../utils/api";
+// import { api } from "../utils/api";
 
 const Home: NextPage = () => {
   const [email, setEmail] = useState("");
 
   const { data: session, status } = useSession();
+
+  const [user, setUser] = useState("");
+  const changeName = api.user.changeName.useMutation();
 
   if (status == "authenticated") {
     console.log("chinese kaas eten nom nom nom");
@@ -24,7 +31,14 @@ const Home: NextPage = () => {
         </Head>
         <main>
           <h1>Welkom {session.user.name}</h1>
-          <button onClick={() => signOut()}>Log out</button>
+          <button onClick={() => signOut()}>Log out</button><br />
+
+          <input type="text" onChange={ (e) => {
+            setUser(e.target.value);
+          }} />
+          <button onClick={ () => {
+            changeName.mutate({ name: user });  
+          }}>Submit</button>
         </main>
       </>
     );
@@ -43,16 +57,16 @@ const Home: NextPage = () => {
           <div className={styles.box}>
             <img src="/chillhub.png" alt="jpg" />
 
-            <input type="text" onChange={ (e) => {
+            <input type="text" placeholder="Email" onChange={ (e) => {
               setEmail(e.target.value);
             }} />
-            <button onClick={ () => {
+            <button className={styles.sign} onClick={ () => {
               signIn("email", { email: email}); 
             }}>Sign in</button>
 
-            <button onClick={ () => {
+            <button className={styles.discord} onClick={ () => {
               signIn("discord");
-            }}>Log in met discord</button>
+            }}><b>Log in met discord</b></button>
           </div>
         </div>
 
