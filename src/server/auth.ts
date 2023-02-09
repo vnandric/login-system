@@ -8,7 +8,7 @@ import DiscordProvider from "next-auth/providers/discord";
 import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "../env/server.mjs";
-import { prisma } from "./db";
+import { prisma } from "./db";  
 
 /**
  * Module augmentation for `next-auth` types.
@@ -63,7 +63,7 @@ export const authOptions: NextAuthOptions = {
         }
 
       }
-    }),
+    }), 
     /**
      * ...add more providers here
      *
@@ -74,6 +74,10 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      **/
   ],
+  pages: {
+    verifyRequest: "/verify-request",
+    newUser: "/new-user",
+  }
 };
 
 /**
