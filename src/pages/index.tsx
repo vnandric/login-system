@@ -10,12 +10,10 @@ import { api } from "../../src/utils/api";
 
 import styles from "../styles/index.module.scss";
 
-// import { api } from "../utils/api";
-
 const Home: NextPage = () => {
-  const [email, setEmail] = useState("");
-
   const { data: session, status } = useSession();
+
+  const [email, setEmail] = useState("");
 
   const [user, setUser] = useState("");
   const changeName = api.user.changeName.useMutation();
